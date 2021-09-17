@@ -12,7 +12,7 @@ namespace KalianShopApplication.Domain
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<TextField> TextFields { get; set; }
         public DbSet<ServiceItem> ServiceItems { get; set; }
@@ -20,47 +20,50 @@ namespace KalianShopApplication.Domain
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
-                Id = "7c7e3d94-1000-49aa-a831-0abe1c9c95ef",
+                Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
                 Name = "admin",
                 NormalizedName = "ADMIN"
             });
+
             modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
             {
-                Id = "abc2c623-9698-4348-a8ac-9b56ae42f994",
+                Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                 UserName = "admin",
-                NormalizedUserName = "Admin",
-                Email = "Igartuk@gmail.com",
-                NormalizedEmail = "IGARTUK@GMAIL.COM",
+                NormalizedUserName = "ADMIN",
+                Email = "my@email.com",
+                NormalizedEmail = "MY@EMAIL.COM",
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "superpassword"),
-                SecurityStamp = String.Empty
+                SecurityStamp = string.Empty
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = "ca29b9ba-22d1-4128-8e7c-e4fcfb6b8c76",
-                UserId = "cf1c3da6-caa1-4463-b614-4f40c2ab9bb8"
+                RoleId = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
+                UserId = "3b62472e-4f66-49fa-a20f-e7685b9565d8"
             });
+
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
-                Id = new Guid("98d22faa-1780-4088-84ed-be6a9166f9cd"),
+                Id = new Guid("63dc8fa6-07ae-4391-8916-e057f71239ce"),
                 CodeWord = "PageIndex",
-                Title = "Main"
+                Title = "Главная"
             });
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
-                Id = new Guid("c099ca99-1381-4cd8-a7c2-e1547ac6808c"),
+                Id = new Guid("70bf165a-700a-4156-91c0-e83fce0a277f"),
                 CodeWord = "PageServices",
-                Title = "Our services "
+                Title = "Наши услуги"
             });
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
-                Id = new Guid("c3760745-2c89-4fa4-a601-1912b6462f07"),
+                Id = new Guid("4aa76a4c-c59d-409a-84c1-06e6487a137a"),
                 CodeWord = "PageContacts",
-                Title = "Contacts"
+                Title = "Контакты"
             });
         }
-    }
+}
 }

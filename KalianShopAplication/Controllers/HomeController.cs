@@ -1,16 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using Dapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KalianShopApplication.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IDbConnection _connection;
+
+        public HomeController(IDbConnection connection)
         {
-            return View();
+            _connection = connection;
         }
+
+        //public IActionResult Index()
+        //{ 
+        //    var tt = _connection.Query("SELECT * FROM Customers").ToList();
+
+        //    return View();
+        //}
     }
 }
