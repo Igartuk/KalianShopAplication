@@ -15,33 +15,33 @@ namespace KalianShopApplication.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> singinMgr) 
+        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> singinMgr)
         {
             userManager = userMgr;
             signInManager = singinMgr;
         }
 
         [AllowAnonymous]
-        public IActionResult Login(string returnUrl) 
+        public IActionResult Login(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
             return View(new LoginViewModel());
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model,string returnUrl) 
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 IdentityUser user = await userManager.FindByNameAsync(model.UserName);
-                if (user != null) 
-                { 
+                if (user != null)
+                {
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
                         return Redirect(returnUrl ?? "/");
-                    }              
+                    }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.UserName), "Неверный логин или пароль");
             }
@@ -49,7 +49,7 @@ namespace KalianShopApplication.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Logout() 
+        public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");

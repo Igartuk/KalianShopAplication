@@ -1,24 +1,32 @@
 ﻿using System.Data;
 using System.Linq;
 using Dapper;
+using KalianShopApplication.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KalianShopApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDbConnection _connection;
+        //private readonly IDbConnection _connection;
+        private readonly DataManager dataManager;
+        //public HomeController(IDbConnection connection)
+        //{
+        //    _connection = connection;
+        //}
 
-        public HomeController(IDbConnection connection)
+        public HomeController(DataManager dataManager) 
         {
-            _connection = connection;
+            this.dataManager = dataManager;
         }
 
-        //public IActionResult Index()
-        //{ 
-        //    var tt = _connection.Query("SELECT * FROM Customers").ToList();
-
-        //    return View();
-        //}
+        public IActionResult Index()
+        {
+            return View(dataManager.TextFields.GetTextFieldByCodeWord("PageIndex"));
+        }
+        public IActionResult Contacts()
+        {
+            return View(dataManager.TextFields.GetTextFieldByCodeWord("PageContacts"));
+        }
     }
 }

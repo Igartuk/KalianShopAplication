@@ -23,6 +23,7 @@ namespace KalianShopApplication
         public void ConfigureServices(IServiceCollection services)
         {
             Configuration.Bind("Project", new Config());
+
             services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
             services.AddTransient<IServiceItemsRepository,EFServiceItemsRepository>();
             services.AddTransient<DataManager>();
@@ -63,7 +64,7 @@ namespace KalianShopApplication
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-            
+           
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -72,10 +73,10 @@ namespace KalianShopApplication
             app.UseAuthentication();
             app.UseAuthorization();
 
-     
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("admin", "{area:exsist}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
