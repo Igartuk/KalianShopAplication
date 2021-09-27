@@ -82,7 +82,7 @@ h1, h2, h3, h4 {
   font-weight: normal; }
 
 h1 {
-  text-transform: lowercase; }
+  text-transform: uppercase; }
 
 h2 {
   text-transform: lowercase;
@@ -821,7 +821,7 @@ ul.link-list li {
 
 .button {
   background-image: -moz-linear-gradient(top, #008dad, #007b9d);
-  background-image: -webkit-linear-gradient(top, #008dad, #007b9d);
+  background-image: -webkit-linear-gradient(top, #ff0000, #000000);
   background-image: -ms-linear-gradient(top, #008dad, #007b9d);
   background-image: linear-gradient(top, #008dad, #007b9d);
   display: inline-block;
